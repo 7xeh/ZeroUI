@@ -61,18 +61,33 @@ Use `:root` to control theme variables:
 
 Use with any Discord CSS injector like [Vencord](https://github.com/Vendicated/Vencord).
 
-1. Paste the full CSS into your custom theme section.
-2. Edit `:root` variables to customize appearance.
-3. Restart Discord or reload theme.
+### Method 1: Manual File Placement
+
+1. Download the theme file: [ZeroUI.css](https://raw.githubusercontent.com/7xeh/ZeroUI/refs/heads/main/ZeroUI.css)
+2. Place it in the following directory:
+
+   ```
+\AppData\Roaming\Vencord\themes
+   ```
+
+```
+
+### Method 2: Through Discord UI
+1. Open Discord settings.
+2. Go to the **Themes** tab (under Vencord).
+3. Click **"Open Theme Folder"**.
+4. Drag and drop the downloaded `ZeroUI.css` file into that folder.
+
+Then, enable the theme inside Vencord and reload Discord.
 
 ## 🔗 Author
-
 Made with 💀 by **7xeh**
-
-* Discord: `7xeh`
-* GitHub: [github.com/7xeh](https://github.com/7xeh)
-* Invite Link: `discord.gg/QSPhPsq9y5`
+- Discord: `7xeh`
+- GitHub: [github.com/7xeh](https://github.com/7xeh)
+- Invite Link: `discord.gg/QSPhPsq9y5`
 
 ---
 
 > *If you use this theme and like it, star the repo or drop a follow to support the work.*
+
+```
