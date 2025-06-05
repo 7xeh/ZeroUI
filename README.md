@@ -79,9 +79,3 @@ Made with 💀 by **7xeh**
 - Discord: `7xeh`
 - GitHub: [github.com/7xeh](https://github.com/7xeh)
 - Invite Link: `discord.gg/QSPhPsq9y5`
-
----
-
-> *If you use this theme and like it, star the repo or drop a follow to support the work.*
-
-```
