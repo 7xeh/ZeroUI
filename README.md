@@ -64,9 +64,7 @@ Use with any Discord CSS injector like [Vencord](https://github.com/Vendicated/V
 ### Method 1: Manual File Placement
 
 1. Download the theme file: [ZeroUI.css](https://raw.githubusercontent.com/7xeh/ZeroUI/refs/heads/main/ZeroUI.css)
-2. Place it in the following directory:
-
-```\AppData\Roaming\Vencord\themes```
+2. Place it in the following directory: ```\AppData\Roaming\Vencord\themes```
 
 ### Method 2: Through Discord UI
 1. Open Discord settings.
