@@ -38,16 +38,8 @@ Perfect for anyone who wants a modern, frosted-glass inspired Discord experience
 
 ---
 
-
 ## 🚧 Work in Progress
 ZeroUI is still being actively developed. Expect frequent updates, refinements, and new features.
-
----
-
-## 👥 Credits
-- **[7xeh](https://github.com/7xeh)** – Head Developer  
-- **Reqid** – Founder  
-- **Creed** – Developer  
 
 ---
 
