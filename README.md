@@ -38,10 +38,6 @@ Perfect for anyone who wants a modern, frosted-glass inspired Discord experience
 
 ---
 
-## 📸 Screenshots
-*(Add screenshots of the theme here – UI examples, frosted glass panels, etc.)*
-
----
 
 ## 🚧 Work in Progress
 ZeroUI is still being actively developed. Expect frequent updates, refinements, and new features.
