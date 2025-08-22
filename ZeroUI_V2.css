@@ -1,0 +1,368 @@
+/**
+ * @name ZeroUI V2 (No Splash) — 2.1c
+ * @author 7xeh
+ * @description A sleek, Discord theme built for aesthetic and usability. (Splash removed + release fixes)
+ * @version 2.1c
+ * @authorId 785035260852830219
+ */
+
+/* Other Imports */
+@import url('https://raw.githubusercontent.com/mwittrien/BetterDiscordAddons/refs/heads/master/Themes/_res/SettingsIcons.css');
+@import url("https://raw.githubusercontent.com/KrstlSkll69/vc-snippets/main/SyncedWithGameRecolor.css");
+@import url("https://raw.githubusercontent.com/acheronx0577/Better-Compact-Command-Menu-With-Smooth-Transition/refs/heads/main/Better%20Compact%20Command%20Menu%20With%20Smooth%20Transition.css");
+
+/* Apple Emoji Replace */
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/spritesheets.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/people.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/nature.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/food.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/activity.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/travel.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/objects.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/symbols.css);
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/src/Apple/flags.css);
+
+.sprite__04eed {
+  mask: url(...);
+	-webkit-mask: none !important;
+	background-color: transparent !important;
+	background-position: var(--custom-emoji-sprite-bg-position) !important;
+	background-size: var(--custom-emoji-sprite-bg-size) !important;
+}
+.spriteGreyscale__04eed { filter: grayscale(1) !important; }
+
+/* Message Actions Hover */
+[class^=buttonsInner_] [aria-label]:not([aria-label="More"],[aria-label="Delete"]),
+[class^=buttonsInner_] .separator_f84418{
+  pointer-events: none;
+  opacity: 0;
+  position: relative;
+  margin-left: -34px !important;
+  transition: margin-left .3s ease, opacity .1s ease;
+  z-index: 1;
+}
+[class^=buttonsInner_]:hover [aria-label]:not([aria-label="More"],[aria-label="Delete"]),
+[class^=buttonsInner_]:hover .separator_f84418{
+  pointer-events: all;
+  opacity: 1;
+  position: relative;
+  margin-left: 0 !important;
+}
+
+/* Profile Popout Actions Hover — keyboard friendly */
+.wrapper_da5890:not(:hover):not(:focus-within){
+  pointer-events: none;
+}
+.wrapper_da5890:is(:hover, :focus-within){
+  pointer-events: auto;
+}
+.wrapper_da5890 button:not([aria-label="More"]){
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(10px);
+  transition: all .3s ease;
+}
+.wrapper_da5890 button[aria-label="More"]{
+  opacity: 1;
+  pointer-events: all;
+  transform: none;
+}
+.wrapper_da5890:is(:hover, :focus-within) button:not([aria-label="More"]){
+  opacity: 1;
+  pointer-events: all;
+  transform: none;
+}
+
+/* Collapsed Search Bar */
+.search__49676:not(:focus-within) .searchBar__97492{
+  border: transparent;
+  background: transparent;
+  margin-left: -6px;
+  width: 30px;
+  align-items: center;
+  transition: width .3s ease, background .3s ease, border .3s ease;
+}
+.search__49676 .iconContainer_fea832{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin-right: 4px !important;
+  right: 0;
+  cursor: pointer;
+}
+.search__49676 .iconContainer_fea832:hover *{ color: var(--icon-secondary); }
+.search__49676:focus-within .iconContainer_fea832 *{ color: var(--icon-primary); }
+.icon__97492{ cursor: auto; }
+.search__49676:focus-within .searchBar__97492{
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-base-tertiary);
+  width: 244px;
+  align-items: center;
+  transition: width .3s ease, background .3s ease, border .3s ease;
+}
+
+/* Chat Button Hover Fix (flattened) */
+.buttons__74017{
+  gap: 0 !important;
+  pointer-events: auto !important;
+}
+.buttons__74017:hover .expression-picker-chat-input-button{
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+.expression-picker-chat-input-button{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(10px);
+  transition: all .3s ease;
+}
+.expression-picker-chat-input-button:has(.emojiButton__04eed){
+  opacity: 1 !important;
+  pointer-events: all !important;
+  transform: none !important;
+}
+
+/* Hide unused buttons (scoped to panels area to be safer) */
+:where(section[class^="panels_"], section[class*=" panels_"]) button[aria-label="Apps"],
+:where(section[class^="panels_"], section[class*=" panels_"]) div[aria-label="Send a gift"]{
+  display: none !important;
+}
+
+/* Compact right click context menu (flattened) */
+.layer_da8173 > .menu_c1e9c4{ min-width: 0; width: 171px !important; }
+.layer_da8173 > .menu_c1e9c4 .scroller_c1e9c4{ margin: -4px; }
+.layer_da8173 > .menu_c1e9c4 .separator_c1e9c4{ margin: 1px 8px !important; }
+.layer_da8173 > .menu_c1e9c4 .wrapper_f563df{ padding: 0 !important; margin: 1px; }
+.layer_da8173 > .menu_c1e9c4 .item_c1e9c4{ min-height: 0; padding: 4px 8px; }
+.layer_da8173 > .menu_c1e9c4 .icon_f563df{ width: 18px; }
+.layer_da8173 > .menu_c1e9c4 .button_f563df{ width: 36px; height: 36px; border-radius: 4px; }
+.layer_da8173 > .menu_c1e9c4 .icon_c1e9c4{ width: 18px; height: 18px; }
+.layer_da8173 > .menu_c1e9c4 .iconContainer_c1e9c4{ display: flex; justify-content: center; align-items: center; }
+
+/* Guild Tag Animation */
+[class^="chipletContainerInner_"] > span > .unselectable__10651{
+  display: inline-block; white-space: nowrap; overflow: hidden; max-width: 0;
+  will-change: max-width, margin;
+  transition: max-width .7s cubic-bezier(.34,1.56,.64,1), margin .7s cubic-bezier(.34,1.56,.64,1);
+}
+[class^="chipletContainerInner_"]:hover > span > .unselectable__10651{
+  max-width: 20ch; margin-right: .3ch; transition-delay: .08s;
+}
+[class^="chipletContainerInner_"] > span > img.badge__10651{
+  margin-right: 0;
+  transition: transform .8s cubic-bezier(.34,1.56,.64,1), margin .7s cubic-bezier(.34,1.56,.64,1);
+}
+[class^="chipletContainerInner_"]:hover > span > img.badge__10651{
+  transform: rotateZ(360deg); margin-right: .6ch; transition-delay: .08s;
+}
+
+/* Consistent Chat Bar */
+.channelBottomBarArea_f75fb0 > div{
+  margin: 10px 6px 9px 6px !important; min-height: 60px;
+}
+.channelBottomBarArea_f75fb0 > div > div.scrollableContainer__74017{
+  position: absolute; bottom: 0; transform: translateY(-4px); width: 100%;
+}
+.attachWrapper__0923f > button{ margin-left: -9px !important; }
+.stackedBars__74017{ margin-bottom: 55px; }
+.typing_b88801.base_b88801{ margin-bottom: 6px; margin-left: 4px; }
+.typing_b88801.base_b88801 > *{ line-height: 10px !important; font-size: 10px !important; }
+.typing_b88801.base_b88801 > div > span > strong > div > svg{
+  height: 10px !important; margin-left: 3px; margin-top: 3px;
+}
+
+/* ——— Spotify Player ——— */
+#vc-spotify-player{
+  --blur-amount: 4px;
+  --normal-bg-colour: var(--bg-overlay-floating, var(--background-base-low, var(--background-secondary-alt)));
+  position: relative;
+  background: linear-gradient(to bottom, transparent 0%, var(--normal-bg-colour) 100%) !important;
+  overflow: hidden;
+  transition: all .4s ease-out;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  height: 130px;
+  margin-block-end: 12px;
+  isolation: isolate;
+}
+#vc-spotify-player > *{ filter: drop-shadow(0 0 10px var(--normal-bg-colour)); }
+#vc-spotify-player:hover{ --blur-amount: 0px; }
+#vc-spotify-player::before,
+#vc-spotify-player::after{
+  z-index: -1; content: ""; position: absolute; inset: 0; transition: all .4s ease-out;
+}
+#vc-spotify-player::before{
+  background: var(--vc-spotify-track-image); background-position: center top; background-size: cover; opacity: .5;
+}
+#vc-spotify-player:hover::before{ opacity: .7; }
+#vc-spotify-player::after{ backdrop-filter: blur(var(--blur-amount)); }
+#vc-spotify-progress-bar > [class^="slider_"] > [class^="bar_"] > [class^="barFill_"]{
+  background-color: #fff !important; background: var(--vc-spotify-track-image); background-size: 1px 100%;
+}
+#vc-spotify-progress-bar > [class^="slider_"] > [class^="bar_"] > [class^="barFill_"]::before{
+  content: ""; position: fixed; height: inherit; width: inherit; top: inherit; left: inherit;
+  border-radius: 4px 0 0 4px; backdrop-filter: blur(10px) saturate(4) brightness(1.6);
+}
+.panels_c48ade {
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+}
+
+
+/* ——— Panels / Cards ——— */
+:where(section[class^="panels_"], section[class*=" panels_"]){
+  background: var(--background-gradient-high, var(--background-base-lowest)); border: 0;
+}
+:where(section[class^="panels_"], section[class*=" panels_"]) :is(div[class^="container_"], div[class*=" container_"]){
+  background: transparent; border: 0; border-radius: 20px; padding: 0;
+}
+:where(section[class^="panels_"], section[class*=" panels_"]) :is(div[class^="panel_"], div[class*=" panel_"]){
+  background: var(--background-gradient-highest, var(--background-base-low));
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  margin-block-end: 12px;
+  overflow: hidden;
+}
+:where(header[class^="header_"], header[class*=" header_"]){ border-bottom: 0; }
+
+/* Compact Code Blocks (flattened) */
+:root{ --codeblock-height: 200px; }
+.codeContainer__75297 > code{
+  display: block; width: 100%; max-height: var(--codeblock-height); overflow-y: auto; scroll-behavior: smooth;
+}
+.codeContainer__75297 > code::-webkit-scrollbar{ height: 8px; width: 8px; }
+.codeContainer__75297 > code::-webkit-scrollbar-corner{ background-color: transparent; }
+.codeContainer__75297 > code::-webkit-scrollbar-thumb{
+  background-clip: padding-box; background-color: var(--scrollbar-thin-thumb);
+  border: 2px solid transparent; border-radius: 4px; min-height: 40px;
+}
+.codeContainer__75297 > code:hover::-webkit-scrollbar-track,
+.codeContainer__75297 > code:hover::-webkit-scrollbar-thumb{ visibility: visible; }
+.codeContainer__75297 > code::-webkit-scrollbar-track{
+  background-color: var(--scrollbar-thin-track); border: 2px solid var(--scrollbar-thin-track);
+  border-color: var(--scrollbar-thin-track);
+}
+
+/* Collapse Category Icon Position Fix (flattened) */
+.containerDefault__29444 > div{ padding-left: .5em; }
+.containerDefault__29444 > div > div{
+  display: flex !important; place-content: start !important; flex-direction: row-reverse !important;
+}
+
+/* Detialed Message TimeStamp */
+span[class*="timestampInline_"] time::before{ content: attr(aria-label); font-size: 12px; }
+span[class*="timestampInline_"]{ font-size: 0 !important; }
+
+/* Status-based Activity Status Icon */
+[class^=memberInner]:has(> div > [aria-label*="Online"]) [class^=subText] svg > path[fill="#23a55a"]{ fill: #43b581; }
+[class^=memberInner]:has(> div > [aria-label*=Idle]) [class^=subText] svg > path[fill="#23a55a"]{ fill: #f0b232; }
+[class^=memberInner]:has(> div > [aria-label*="Do Not Disturb"]) [class^=subText] svg > path[fill="#23a55a"]{ fill: #f23f43; }
+[class^=memberInner]:has(> div > [aria-label*=Streaming]) [class^=subText] svg > path[fill="#23a55a"]{ fill: #643da7; }
+[class^=memberInner] [class^=subText] svg > path[fill="#23a55a"]{ fill: #747f8d; }
+
+/* Unread Dot — smooth, performant, accessible (scoped) */
+:root{
+  --list-item-transition: 180ms cubic-bezier(.2,.8,.2,1);
+  --unread-size: 8px;
+  --unread-hover-scale: 1.6;
+  --unread-x: -4px;
+  --unread-hover-x: 3px;
+  --unread-color: #dfdfdf;
+  --unread-img-webp: url("https://raw.githubusercontent.com/7xeh/ZeroUI/refs/heads/main/Assets/ZeroUI_LOGO.svg");
+  --unread-img-png:  url("https://raw.githubusercontent.com/7xeh/ZeroUI/refs/heads/main/Assets/ZeroUI_LOGO.svg");
+}
+/* reset any global unread shapes */
+:where(#app-mount) :is([class^="unread_"], [class*=" unread_"]){
+  inline-size: initial !important; block-size: initial !important; border-radius: initial !important;
+  background: initial !important; transform: none !important; box-shadow: none !important; transition: none !important;
+}
+/* apply only inside channel rows */
+:where([class^="wrapper_"], [class*=" wrapper_"]) :is([class^="unread_"], [class*=" unread_"]){
+  inline-size: var(--unread-size) !important; block-size: var(--unread-size) !important;
+  border-radius: 999px !important; background: var(--unread-color) !important;
+  transform: translateX(var(--unread-x)) !important;
+ transition:
+    transform var(--list-item-transition),
+    box-shadow var(--list-item-transition),
+    opacity var(--list-item-transition) !important;
+
+}
+/* hover/focus scaling */
+:where([class^="wrapper_"], [class*=" wrapper_"]):is(:hover, :focus-within)
+  :is([class^="unread_"], [class*=" unread_"]){
+  transform: translateX(var(--unread-hover-x)) scale(var(--unread-hover-scale)) !important;
+  box-shadow: 0 0 0 2px color-mix(in lab, var(--unread-color) 30%, transparent) !important;
+}
+/* optional icon mask */
+@supports (mask: url("")){
+  :where([class^="wrapper_"], [class*=" wrapper_"]):is(:hover, :focus-within)
+    :is([class^="unread_"], [class*=" unread_"]){
+    color: var(--unread-color);
+    background: currentColor !important;
+    -webkit-mask: var(--unread-img-webp) center/contain no-repeat !important;
+            mask: var(--unread-img-webp) center/contain no-repeat !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =========================================================
+   ZeroUI — Polish Pack (non-destructive overrides)
+   ========================================================= */
+
+/* 1) Global tokens + motion */
+:root{
+  --zui-dur-1: 180ms cubic-bezier(.2,.8,.2,1);
+  --zui-dur-2: 300ms cubic-bezier(.2,.8,.2,1);
+  --zui-radius: 8px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* 2) Channel row slide (robust hashed selectors) */
+:is([class^="wrapper_"], [class*=" wrapper_"])
+  :is([class^="link_"], [class*=" link_"]){
+  transition: transform var(--zui-dur-1);
+  will-change: transform;
+}
+:is([class^="wrapper_"], [class*=" wrapper_"]):is(:hover, :focus-within)
+  :is([class^="link_"], [class*=" link_"]){
+  transform: translateX(10px);
+}
+
+/* 3) MemberCount — centered + matching dots (ring toggle) */
+.vc-membercount-member-list{
+  --mc-gap: 8px;
+  --mc-group-gap: 24px;
+  --mc-dot: 10px;
+  --mc-online: var(--green-360, #3ba55c);
+  --mc-total:  var(--text-muted, #b5bac1);
+  --mc-ring: 0; /* set to 1 for ring style */
+  display: flex; justify-content: center; align-items: center;
+  gap: var(--mc-group-gap); padding: 6px 8px 0; margin: 0;
+}
+.vc-membercount-member-list > div[aria-label]{ display: inline-flex; align-items: center; gap: var(--mc-gap); }
+.vc-membercount-online-dot,
+.vc-membercount-total-dot{
+  inline-size: var(--mc-dot); block-size: var(--mc-dot); border-radius: 999px;
+  margin: 0 !important; border: 0 !important; outline: 0 !important; box-shadow: none !important;
+  background: color-mix(in lab, currentColor calc(100% - (var(--mc-ring)*100%)), transparent);
+  box-shadow: inset 0 0 0 calc(var(--mc-ring)*2px) currentColor;
+}
+.vc-membercount-member-list > div[aria-label*="online" i]{ color: var(--mc-online); font-weight: 600; }
+.vc-membercount-member-list > div[aria-label*="total"  i]{ color: var(--mc-total);  font-weight: 600; }
+.vc-membercount-member-list > div[aria-label*="online" i] .vc-membercount-online::after{ content:" Online"; font-size: .85em; margin-inline-start: 4px; }
+.vc-membercount-member-list > div[aria-label*="total"  i] .vc-membercount-total::after{  content:" Total";  font-size: .85em; margin-inline-start: 4px; }
+
+/* Tiny UX fixes */
+span[class*="timestampInline_"]{ white-space: nowrap; }
+.search__49676{ overflow: visible; }
+.search__49676 .searchBar__97492{ min-width: 30px; }
+.codeContainer__75297 > code{ scroll-behavior: smooth; }
+
+/* =====================================================================
+   NOTE: All splash-related code has been intentionally removed.
+   ===================================================================== */
