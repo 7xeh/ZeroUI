@@ -1,53 +1,53 @@
-# ZeroUI
+# 🎨 ZeroUI
 
-A sleek, modular Discord theme for [Vencord](https://github.com/Vencord) — built for **style, performance, and customization**.  
-Perfect for anyone who wants a modern, frosted-glass inspired Discord experience.
+A sleek, modular Discord theme for [Vencord](https://github.com/Vencord) — built directly on top of **Discord’s native themes**.  
+Think of it as Discord’s default look, but **cleaner, smoother, and more polished**.
 
 ---
 
 ## ✨ Features
-- **Modern Aesthetic** – Clean, minimal, frosted glass design.  
-- **Performance-Oriented** – Lightweight CSS for smooth performance.  
-- **Customizable** – Modular structure makes it easy to tweak colors, layouts, and effects.  
-- **Dark Mode First** – Designed to complement Discord’s native dark theme.  
-- **Actively Maintained** – Frequent updates & community-driven improvements.
+- 🖤 **Native-Inspired** – Enhances Discord’s built-in themes without breaking the core look.  
+- ⚡ **Lightweight & Fast** – Minimal CSS for smooth performance.  
+- 🎚️ **Refined UI** – Adjusted spacing, consistent design, and small quality-of-life improvements.  
+- 🌙 **Dark Mode First** – Optimized for Discord’s native dark theme.  
+- 🔄 **Actively Maintained** – Frequent updates and polish.  
 
 ---
 
-## 📂 Installation
+## 📥 Installation
 
-1. Install [Vencord](https://github.com/Vencord) (or your preferred custom client).
-2. Download `ZeroUI_V2.css` from this repo.
-3. Place the CSS file into your Vencord themes folder:
-   - Windows:  
-     ```
+1. Install [Vencord](https://github.com/Vencord) (or your preferred custom client).  
+2. Download **`ZeroUI_V2.css`** from this repo.  
+3. Move the file into your Vencord themes folder:  
+   - **Windows**  
+     ```bash
      %AppData%\Vencord\themes
      ```
-   - Linux/macOS:  
-     ```
+   - **Linux/macOS**  
+     ```bash
      ~/.config/Vencord/themes
      ```
-4. Enable it in Vencord’s **Theme Settings**.
+4. Enable it in **Vencord → Theme Settings**.  
 
 ---
 
-## 🖌️ Customization
-- Edit `ZeroUI_V2.css` to tweak colors, blur, and spacing.  
-- Replace assets in the **Assets/** folder for personalized backgrounds/icons.  
-- Mix and match modules to create your own style.
+## 🚧 Development Status
+ZeroUI is **actively developed** — expect refinements, bug fixes, and small UI improvements over time.  
 
 ---
 
-## 🚧 Work in Progress
-ZeroUI is still being actively developed. Expect frequent updates, refinements, and new features.
+## 🙏 Credits
+Special thanks to:  
+- [mwittrien](https://github.com/mwittrien)  
+- [KrstlSkll69](https://github.com/KrstlSkll69)  
+- [acheronx0577](https://github.com/acheronx0577)  
 
 ---
-
-- Credits: mwittrien, KrstlSkll69, acheronx0577
 
 ## 📜 License
-This project is licensed under the **MIT License** – free to use, modify, and share.
+Licensed under the **MIT License** — free to use, modify, and share.  
 
 ---
 
-> 💡 Have feedback, suggestions, or bug reports? Open an issue or submit a pull request!
+💡 **Got feedback, suggestions, or bugs?**  
+Open an issue or submit a pull request!
