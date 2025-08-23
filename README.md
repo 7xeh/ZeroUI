@@ -43,6 +43,8 @@ ZeroUI is still being actively developed. Expect frequent updates, refinements, 
 
 ---
 
+- Credits: mwittrien, KrstlSkll69, acheronx0577
+
 ## 📜 License
 This project is licensed under the **MIT License** – free to use, modify, and share.
 
