@@ -133,11 +133,24 @@
 
 /* Stream Bar */
 .activityPanel_c48ade {
-    background: var(--custom-theme-base-color-dark);
+    background: var(--custom-background-gradient-chat-opacity-base-light);
     border-bottom: 1px solid var(--border-subtle);
     padding-right: var(--space-8);
     position: relative;
     z-index: 2;
+}
+
+/* Title bar */
+.title_c38106 {
+    background: var(--custom-theme-base-color-dark);
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 /* ——— Spotify Player ——— */
