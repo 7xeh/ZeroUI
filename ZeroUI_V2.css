@@ -162,13 +162,13 @@
   overflow: hidden;
   transition: all .4s ease-out;
   border: 1px solid var(--border-subtle);
-  border-radius: 20px;
+  border-radius: 10px;
   height: 130px;
   margin-block-end: 12px;
   isolation: isolate;
 }
 #vc-spotify-player > *{ filter: drop-shadow(0 0 10px var(--normal-bg-colour)); }
-#vc-spotify-player:hover{ --blur-amount: 0px; }
+#vc-spotify-player:hover{ --blur-amount: 2px; }
 #vc-spotify-player::before,
 #vc-spotify-player::after{
   z-index: -1; content: ""; position: absolute; inset: 0; transition: all .4s ease-out;
@@ -184,12 +184,6 @@
 #vc-spotify-progress-bar > [class^="slider_"] > [class^="bar_"] > [class^="barFill_"]::before{
   content: ""; position: fixed; height: inherit; width: inherit; top: inherit; left: inherit;
   border-radius: 4px 0 0 4px; backdrop-filter: blur(10px) saturate(4) brightness(1.6);
-}
-.panels_c48ade {
-    border-top-left-radius: 20px !important;
-    border-top-right-radius: 20px !important;
-    border-bottom-left-radius: 20px !important;
-    border-bottom-right-radius: 20px !important;
 }
 
 /* Compact Code Blocks (flattened) */
