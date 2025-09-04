@@ -131,6 +131,15 @@
   transform: rotateZ(360deg); margin-right: .6ch; transition-delay: .08s;
 }
 
+/* Stream Bar */
+.activityPanel_c48ade {
+    background: var(--custom-theme-base-color-dark);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-right: var(--space-8);
+    position: relative;
+    z-index: 2;
+}
+
 /* ——— Spotify Player ——— */
 #vc-spotify-player{
   --blur-amount: 4px;
