@@ -32,6 +32,11 @@
   --animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --animation-easing-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
+  /* Hardware acceleration helpers */
+  --gpu-accelerate: translateZ(0);
+  --backface-visibility: hidden;
+  --perspective: 1000px;
+  
   /* Spacing System */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -87,6 +92,8 @@
   background-size: var(--custom-emoji-sprite-bg-size) !important;
   will-change: transform;
   contain: layout style paint;
+  transform: var(--gpu-accelerate);
+  backface-visibility: var(--backface-visibility);
 }
 
 .spriteGreyscale__04eed { 
@@ -97,30 +104,33 @@
 /* Modern Message Actions Hover */
 [class^=buttonsInner_] {
   contain: layout style;
+  transform: var(--gpu-accelerate);
 }
 
 [class^=buttonsInner_] [aria-label]:not([aria-label="More"],[aria-label="Delete"]),
 [class^=buttonsInner_] .separator_f84418 {
   pointer-events: none;
   opacity: 0;
-  transform: translateX(var(--message-actions-translate));
+  transform: translateX(var(--message-actions-translate)) translateZ(0);
   transition: 
     transform var(--animation-duration-normal) var(--animation-easing-spring),
     opacity var(--animation-duration-fast) var(--animation-easing-smooth);
   will-change: transform, opacity;
+  backface-visibility: var(--backface-visibility);
 }
 
 [class^=buttonsInner_]:hover [aria-label]:not([aria-label="More"],[aria-label="Delete"]),
 [class^=buttonsInner_]:hover .separator_f84418 {
   pointer-events: all;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
 /* Enhanced Profile Popout Actions */
 .wrapper_da5890 {
   container-type: inline-size;
   transition: box-shadow var(--animation-duration-normal) var(--animation-easing-smooth);
+  transform: var(--gpu-accelerate);
 }
 
 .wrapper_da5890:not(:hover):not(:focus-within) {
@@ -135,44 +145,46 @@
 .wrapper_da5890 button:not([aria-label="More"]) {
   opacity: 0;
   pointer-events: none;
-  transform: translateX(var(--profile-actions-translate)) scale(0.95);
+  transform: translateX(var(--profile-actions-translate)) scale(0.95) translateZ(0);
   transition: 
     transform var(--animation-duration-normal) var(--animation-easing-spring),
     opacity var(--animation-duration-fast) var(--animation-easing-smooth);
   will-change: transform, opacity;
+  backface-visibility: var(--backface-visibility);
 }
 
 .wrapper_da5890 button[aria-label="More"] {
   opacity: 1;
   pointer-events: all;
-  transform: none;
+  transform: translateZ(0);
 }
 
 .wrapper_da5890:is(:hover, :focus-within) button:not([aria-label="More"]) {
   opacity: 1;
   pointer-events: all;
-  transform: translateX(0) scale(1);
+  transform: translateX(0) scale(1) translateZ(0);
 }
 
 /* Modern Collapsed Search Bar */
 .search__49676 {
   container-type: inline-size;
+  transform: var(--gpu-accelerate);
 }
 
 .search__49676:not(:focus-within) .searchBar__97492 {
   border: 1px solid transparent;
   background: transparent;
-  inline-size: var(--search-width-collapsed);
+  width: var(--search-width-collapsed); /* Using width instead of inline-size for better performance */
   transition: 
-    inline-size var(--animation-duration-normal) var(--animation-easing-smooth),
+    width var(--animation-duration-normal) var(--animation-easing-smooth),
     background var(--animation-duration-normal) var(--animation-easing-smooth),
     border-color var(--animation-duration-normal) var(--animation-easing-smooth);
   will-change: width, background, border-color;
 }
 
 .search__49676 .iconContainer_fea832 {
-  inline-size: 1.25rem;
-  block-size: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
   position: absolute;
   inset-inline-end: var(--spacing-xs);
   cursor: pointer;
@@ -190,10 +202,10 @@
 .search__49676:focus-within .searchBar__97492 {
   border: 1px solid var(--border-subtle);
   background: var(--bg-base-tertiary);
-  inline-size: var(--search-width-expanded);
+  width: var(--search-width-expanded); /* Using width instead of inline-size */
   box-shadow: var(--shadow-md);
   transition: 
-    inline-size var(--animation-duration-normal) var(--animation-easing-smooth),
+    width var(--animation-duration-normal) var(--animation-easing-smooth),
     background var(--animation-duration-normal) var(--animation-easing-smooth),
     border-color var(--animation-duration-normal) var(--animation-easing-smooth),
     box-shadow var(--animation-duration-normal) var(--animation-easing-smooth);
@@ -201,12 +213,13 @@
 
 /* Enhanced Compact Context Menu */
 .layer_da8173 > .menu_c1e9c4 { 
-  min-inline-size: 0; 
-  inline-size: 10.6875rem !important;
+  min-width: 0; /* Using min-width instead of min-inline-size */
+  width: 10.6875rem !important; /* Using width instead of inline-size */
   backdrop-filter: blur(1rem) saturate(1.2);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   border: 1px solid color-mix(in srgb, var(--border-subtle) 80%, transparent);
+  transform: var(--gpu-accelerate);
 }
 
 .layer_da8173 > .menu_c1e9c4 .scroller_c1e9c4 { 
@@ -223,83 +236,91 @@
 }
 
 .layer_da8173 > .menu_c1e9c4 .item_c1e9c4 { 
-  min-block-size: 0; 
+  min-height: 0; /* Using min-height instead of min-block-size */
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
   transition: 
     background-color var(--animation-duration-fast) var(--animation-easing-smooth),
     transform var(--animation-duration-fast) var(--animation-easing-smooth);
+  backface-visibility: var(--backface-visibility);
+  transform: var(--gpu-accelerate);
 }
 
 .layer_da8173 > .menu_c1e9c4 .item_c1e9c4:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) translateZ(0);
 }
 
 .layer_da8173 > .menu_c1e9c4 .icon_f563df { 
-  inline-size: 1.125rem;
+  width: 1.125rem; /* Using width instead of inline-size */
 }
 
 .layer_da8173 > .menu_c1e9c4 .button_f563df { 
-  inline-size: 2.25rem; 
-  block-size: 2.25rem; 
+  width: 2.25rem; /* Using width instead of inline-size */
+  height: 2.25rem; /* Using height instead of block-size */
   border-radius: var(--radius-sm);
   transition: transform var(--animation-duration-fast) var(--animation-easing-smooth);
+  transform: var(--gpu-accelerate);
+  will-change: transform;
 }
 
 .layer_da8173 > .menu_c1e9c4 .button_f563df:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(0);
 }
 
 .layer_da8173 > .menu_c1e9c4 .icon_c1e9c4 { 
-  inline-size: 1.125rem; 
-  block-size: 1.125rem;
+  width: 1.125rem; /* Using width instead of inline-size */
+  height: 1.125rem; /* Using height instead of block-size */
 }
 
 /* Modern Guild Tag Animation */
 [class^="chipletContainerInner_"] {
   overflow: hidden;
   contain: layout style;
+  transform: var(--gpu-accelerate);
 }
 
 [class^="chipletContainerInner_"] > span > .unselectable__10651 {
   display: inline-block; 
   white-space: nowrap; 
   overflow: hidden; 
-  max-inline-size: 0;
+  max-width: 0; /* Using max-width instead of max-inline-size */
   will-change: max-width, margin;
   transition: 
-    max-inline-size var(--animation-duration-slow) var(--animation-easing-spring),
-    margin-inline-end var(--animation-duration-slow) var(--animation-easing-spring);
+    max-width var(--animation-duration-slow) var(--animation-easing-spring),
+    margin-right var(--animation-duration-slow) var(--animation-easing-spring); /* Using margin-right instead of margin-inline-end */
+  backface-visibility: var(--backface-visibility);
 }
 
 [class^="chipletContainerInner_"]:hover > span > .unselectable__10651 {
-  max-inline-size: 20ch; 
-  margin-inline-end: 0.3ch; 
+  max-width: 20ch; /* Using max-width instead of max-inline-size */
+  margin-right: 0.3ch; /* Using margin-right instead of margin-inline-end */
   transition-delay: var(--animation-duration-fast);
 }
 
 [class^="chipletContainerInner_"] > span > img.badge__10651 {
-  margin-inline-end: 0;
+  margin-right: 0; /* Using margin-right instead of margin-inline-end */
   transition: 
     transform var(--animation-duration-slow) var(--animation-easing-spring),
-    margin-inline-end var(--animation-duration-slow) var(--animation-easing-spring);
+    margin-right var(--animation-duration-slow) var(--animation-easing-spring); /* Using margin-right instead of margin-inline-end */
   will-change: transform, margin;
+  transform: var(--gpu-accelerate);
 }
 
 [class^="chipletContainerInner_"]:hover > span > img.badge__10651 {
-  transform: rotate(360deg); 
-  margin-inline-end: 0.6ch; 
+  transform: rotate(360deg) translateZ(0); 
+  margin-right: 0.6ch; /* Using margin-right instead of margin-inline-end */
   transition-delay: var(--animation-duration-fast);
 }
 
 /* Enhanced Stream Bar */
 .activityPanel_c48ade {
   background: var(--custom-background-gradient-chat-opacity-base-light);
-  border-block-end: 1px solid var(--border-subtle);
-  padding-inline-end: var(--space-8);
+  border-bottom: 1px solid var(--border-subtle); /* Using border-bottom instead of border-block-end */
+  padding-right: var(--space-8); /* Using padding-right instead of padding-inline-end */
   position: relative;
   z-index: 2;
   backdrop-filter: blur(0.5rem) saturate(1.2);
+  transform: var(--gpu-accelerate);
 }
 
 /* Modern Title Bar */
@@ -311,6 +332,7 @@
   position: absolute;
   inset: 0;
   backdrop-filter: blur(1rem) saturate(1.1);
+  transform: var(--gpu-accelerate);
 }
 
 /* Enhanced Spotify Player */
@@ -327,10 +349,9 @@
   position: relative;
   background: linear-gradient(180deg, transparent 0%, var(--normal-bg-colour) 100%) !important;
   overflow: hidden;
-  /* Transform-based sizing for better performance */
   transform: translateZ(0);
-  height: var(--player-height); /* Use height instead of block-size for better browser optimization */
-  margin-bottom: var(--spacing-lg); /* Use margin-bottom for better browser optimization */
+  height: var(--player-height);
+  margin-bottom: var(--spacing-lg);
   border: 1px solid var(--border-subtle);
   border-top-left-radius: var(--radius-lg);
   border-top-right-radius: var(--radius-lg);
@@ -338,11 +359,11 @@
   contain: layout style paint;
   transform-origin: bottom left;
   box-shadow: var(--shadow-md);
-  /* Initial backdrop filter */
   backdrop-filter: blur(var(--blur-amount));
-  /* Single transition property for better performance */
   transition: height 0.2s ease-out;
-  will-change: height;
+  will-change: height, transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Separate backdrop-filter to avoid lag during size transition */
@@ -356,6 +377,7 @@
   background-size: cover; 
   opacity: 0.5;
   filter: blur(2px);
+  transform: var(--gpu-accelerate);
 }
 
 #vc-spotify-player::after { 
@@ -376,22 +398,24 @@
 #vc-spotify-player > * { 
   filter: drop-shadow(0 0 0.625rem rgba(0, 0, 0, 0.2));
   transition: transform 0.15s ease-out;
+  transform: var(--gpu-accelerate);
 }
 
 /* Controls Enhancement - Replace transition: all with specific properties */
 #vc-spotify-player [class*="button-"] {
   opacity: 0.8;
-  transform: scale(0.9);
+  transform: scale(0.9) translateZ(0);
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
   transition: 
     opacity 0.15s ease-out,
     transform 0.15s ease-out,
     filter 0.15s ease-out;
+  will-change: opacity, transform;
 }
 
 #vc-spotify-player [class*="button-"]:hover {
   opacity: 1;
-  transform: scale(0.95);
+  transform: scale(0.95) translateZ(0);
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
 }
 
@@ -399,16 +423,19 @@
 #vc-spotify-progress-bar > [class^="slider_"] > [class^="barFill_"] {
   background: linear-gradient(90deg, var(--spotify-accent), #4aebc4) !important;
   box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
-  transition: width 0.2s ease-out; /* Use width instead of transform */
+  transition: transform 0.2s ease-out; /* Using transform-based animation instead of width */
   border-radius: 50% !important;
+  transform-origin: left center;
+  will-change: transform;
 }
 
 #vc-spotify-progress-bar > [class^="slider_"] > [class^="grabber_"] {
   background-color: white !important;
   border-radius: 50% !important;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
-  transform: scale(0);
+  transform: scale(0) translateZ(0);
   transition: transform 0.2s ease-out;
+  will-change: transform;
 }
 
 /* Add reduced motion specific optimizations */
@@ -441,12 +468,13 @@
   overflow: hidden;
   backdrop-filter: blur(0.25rem);
   border: 1px solid color-mix(in srgb, var(--border-subtle) 60%, transparent);
+  transform: var(--gpu-accelerate);
 }
 
 .codeContainer__75297 > code {
   display: block; 
-  inline-size: 100%; 
-  max-block-size: var(--codeblock-height); 
+  width: 100%; /* Using width instead of inline-size */
+  max-height: var(--codeblock-height); /* Using max-height instead of max-block-size */
   overflow-y: auto; 
   scroll-behavior: smooth;
   scrollbar-width: thin;
@@ -454,8 +482,8 @@
 }
 
 .codeContainer__75297 > code::-webkit-scrollbar { 
-  block-size: 0.5rem; 
-  inline-size: 0.5rem;
+  height: 0.5rem; /* Using height instead of block-size */
+  width: 0.5rem; /* Using width instead of inline-size */
 }
 
 .codeContainer__75297 > code::-webkit-scrollbar-corner { 
@@ -467,7 +495,7 @@
   background-color: var(--scrollbar-thin-thumb);
   border: 2px solid transparent; 
   border-radius: var(--radius-sm); 
-  min-block-size: 2.5rem;
+  min-height: 2.5rem; /* Using min-height instead of min-block-size */
   transition: background-color var(--animation-duration-fast) var(--animation-easing-smooth);
 }
 
@@ -496,7 +524,7 @@ span[class*="timestampInline_"] {
 /* Modern Status-based Activity Status Icons */
 [class^=memberInner]:has(> div > [aria-label*="Online"]) [class^=subText] svg > path[fill="#23a55a"] { 
   fill: #43b581;
-  transition: fill var(--animation-duration-fast) var(--animation-easing-smooth);
+  transition: fill var(--animation-duration-fast) ease-out; /* Simplified easing */
 }
 
 [class^=memberInner]:has(> div > [aria-label*=Idle]) [class^=subText] svg > path[fill="#23a55a"] { 
@@ -539,11 +567,11 @@ span[class*="timestampInline_"] {
 
 /* Modern unread dot state */
 .wrapper__2ea32 :is([class^="unread_"], [class*=" unread_"]) {
-  inline-size: var(--unread-size) !important;
-  block-size: var(--unread-size) !important;
+  width: var(--unread-size) !important; /* Using width instead of inline-size */
+  height: var(--unread-size) !important; /* Using height instead of block-size */
   border-radius: var(--radius-full) !important;
   background: var(--unread-color) !important;
-  transform: translateX(calc(var(--unread-size) * -0.5)) !important;
+  transform: translateX(calc(var(--unread-size) * -0.5)) translateZ(0) !important;
   transition: 
     transform var(--animation-duration-normal) var(--animation-easing-spring),
     box-shadow var(--animation-duration-normal) var(--animation-easing-smooth),
@@ -551,11 +579,12 @@ span[class*="timestampInline_"] {
   box-shadow: var(--unread-shadow);
   will-change: transform, box-shadow;
   contain: layout style paint;
+  backface-visibility: hidden;
 }
 
 /* Enhanced hover/focus state for unread dot */
 .wrapper__2ea32:is(:hover, :focus-within) :is([class^="unread_"], [class*=" unread_"]) {
-  transform: translateX(calc(var(--unread-size) * -0.6)) scale(var(--unread-scale-hover)) !important;
+  transform: translateX(calc(var(--unread-size) * -0.6)) scale(var(--unread-scale-hover)) translateZ(0) !important;
   box-shadow: var(--unread-glow), var(--shadow-md) !important;
   background: color-mix(in srgb, var(--unread-color) 80%, #fff) !important;
 }
@@ -568,20 +597,22 @@ span[class*="timestampInline_"] {
     margin var(--animation-duration-normal) var(--animation-easing-smooth);
   will-change: transform, margin;
   contain: layout style;
+  transform: var(--gpu-accelerate);
+  backface-visibility: hidden;
 }
 
 [class^="containerDefault_"]:hover {
-  transform: translateX(var(--channel-hover-translate));
+  transform: translateX(var(--channel-hover-translate)) translateZ(0);
 }
 
 /* Enhanced channel with unread messages */
 [class^="containerDefault_"]:has([class^="unread_"], [class*=" unread_"]) {
-  margin-inline-start: 0;
+  margin-left: 0; /* Using margin-left instead of margin-inline-start */
   transition: margin var(--animation-duration-normal) var(--animation-easing-spring);
 }
 
 [class^="containerDefault_"]:has([class^="unread_"], [class*=" unread_"]):hover {
-  margin-inline-start: var(--spacing-xs);
+  margin-left: var(--spacing-xs); /* Using margin-left instead of margin-inline-start */
 }
 
 /* Enhanced channel content transition */
@@ -590,6 +621,7 @@ span[class*="timestampInline_"] {
     background-color var(--animation-duration-normal) var(--animation-easing-smooth), 
     color var(--animation-duration-normal) var(--animation-easing-smooth),
     box-shadow var(--animation-duration-normal) var(--animation-easing-smooth);
+  transform: var(--gpu-accelerate);
 }
 
 /* Enhanced selected channel animation */
@@ -599,10 +631,11 @@ span[class*="timestampInline_"] {
     color var(--animation-duration-fast) var(--animation-easing-smooth), 
     transform var(--animation-duration-normal) var(--animation-easing-spring);
   transform-origin: left;
+  will-change: transform, box-shadow;
 }
 
 [class*="modeSelected_"] [class^="content_"]:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) translateZ(0);
   box-shadow: var(--shadow-sm);
 }
 
@@ -632,15 +665,18 @@ span[class*="timestampInline_"] {
 [class*="animate"],
 [class*="transition"] {
   will-change: transform, opacity;
+  transform: var(--gpu-accelerate);
+  backface-visibility: hidden;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --unread-color: #fff;
-    --shadow-sm: 0 2px 4px 0 rgb(0 0 0 / 0.3);
-    --shadow-md: 0 6px 8px -1px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.3);
-  }
+/* Additional global performance improvements */
+.animated, 
+.animating,
+[class*="animate-"],
+[class*="anim-"] {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: var(--gpu-accelerate);
 }
 
 /* Modern User Panel */
@@ -658,4 +694,5 @@ span[class*="timestampInline_"] {
     border-top: none;
     border-bottom: var(--border-subtle);
     border-radius: var(--radius-lg);
+    transform: var(--gpu-accelerate);
 }
