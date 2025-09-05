@@ -317,68 +317,118 @@
 #vc-spotify-player {
   --blur-amount: 0.25rem;
   --normal-bg-colour: var(--bg-overlay-floating, var(--background-base-low, var(--background-secondary-alt)));
+  --spotify-accent: #1db954;
+  --player-height: 6.5rem;
+  --player-expanded-height: 8.75rem;
+  --album-art-size: 3.75rem;
+  --album-art-expanded-size: 4.25rem;
+  --transition-timing: var(--animation-duration-normal) var(--animation-easing-spring);
+  
   position: relative;
   background: linear-gradient(180deg, transparent 0%, var(--normal-bg-colour) 100%) !important;
   overflow: hidden;
-  transition: all var(--animation-duration-slow) var(--animation-easing-smooth);
+  /* Transform-based sizing for better performance */
+  transform: translateZ(0);
+  height: var(--player-height); /* Use height instead of block-size for better browser optimization */
+  margin-bottom: var(--spacing-lg); /* Use margin-bottom for better browser optimization */
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  block-size: 8.125rem;
-  margin-block-end: var(--spacing-lg);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
   isolation: isolate;
-  backdrop-filter: blur(0.5rem);
   contain: layout style paint;
+  transform-origin: bottom left;
+  box-shadow: var(--shadow-md);
+  /* Initial backdrop filter */
+  backdrop-filter: blur(var(--blur-amount));
+  /* Single transition property for better performance */
+  transition: height 0.2s ease-out;
+  will-change: height;
 }
 
-#vc-spotify-player > * { 
-  filter: drop-shadow(0 0 0.625rem var(--normal-bg-colour));
-}
-
-#vc-spotify-player:hover { 
-  --blur-amount: 0.125rem;
-  transform: translateY(-0.125rem);
-  box-shadow: var(--shadow-xl);
-}
-
-#vc-spotify-player::before,
-#vc-spotify-player::after {
-  z-index: -1; 
+/* Separate backdrop-filter to avoid lag during size transition */
+#vc-spotify-player::before {
+  z-index: -2; 
   content: ""; 
   position: absolute; 
-  inset: 0; 
-  transition: all var(--animation-duration-slow) var(--animation-easing-smooth);
-}
-
-#vc-spotify-player::before {
+  inset: 0;
   background: var(--vc-spotify-track-image); 
-  background-position: center top; 
+  background-position: center center; 
   background-size: cover; 
   opacity: 0.5;
-}
-
-#vc-spotify-player:hover::before { 
-  opacity: 0.7; 
+  filter: blur(2px);
 }
 
 #vc-spotify-player::after { 
-  backdrop-filter: blur(var(--blur-amount)) saturate(1.2);
-}
-
-#vc-spotify-progress-bar > [class^="slider_"] > [class^="bar_"] > [class^="barFill_"] {
-  background-color: #fff !important; 
-  background: var(--vc-spotify-track-image); 
-  background-size: 1px 100%;
-}
-
-#vc-spotify-progress-bar > [class^="slider_"] > [class^="bar_"] > [class^="barFill_"]::before {
+  z-index: -1;
   content: ""; 
-  position: fixed; 
-  block-size: inherit; 
-  inline-size: inherit; 
-  inset-block-start: inherit; 
-  inset-inline-start: inherit;
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm); 
-  backdrop-filter: blur(0.625rem) saturate(4) brightness(1.6);
+  position: absolute; 
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Simple hover state - no transition on box-shadow to improve performance */
+#vc-spotify-player:hover { 
+  height: var(--player-expanded-height);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Optimize child element animations */
+#vc-spotify-player > * { 
+  filter: drop-shadow(0 0 0.625rem rgba(0, 0, 0, 0.2));
+  transition: transform 0.15s ease-out;
+}
+
+/* Controls Enhancement - Replace transition: all with specific properties */
+#vc-spotify-player [class*="button-"] {
+  opacity: 0.8;
+  transform: scale(0.9);
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
+  transition: 
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out,
+    filter 0.15s ease-out;
+}
+
+#vc-spotify-player [class*="button-"]:hover {
+  opacity: 1;
+  transform: scale(0.95);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Progress Bar Enhancement */
+#vc-spotify-progress-bar > [class^="slider_"] > [class^="barFill_"] {
+  background: linear-gradient(90deg, var(--spotify-accent), #4aebc4) !important;
+  box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
+  transition: width 0.2s ease-out; /* Use width instead of transform */
+  border-radius: 50% !important;
+}
+
+#vc-spotify-progress-bar > [class^="slider_"] > [class^="grabber_"] {
+  background-color: white !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+  transform: scale(0);
+  transition: transform 0.2s ease-out;
+}
+
+/* Add reduced motion specific optimizations */
+@media (prefers-reduced-motion: reduce) {
+  #vc-spotify-player {
+    transition: none;
+  }
+  
+  #vc-spotify-player > * {
+    transition: none;
+  }
+  
+  #vc-spotify-player [class*="button-"] {
+    transition: none;
+  }
+  
+  #vc-spotify-progress-bar > [class^="slider_"] > [class^="barFill_"],
+  #vc-spotify-progress-bar > [class^="slider_"] > [class^="grabber_"] {
+    transition: none;
+  }
 }
 
 /* Enhanced Code Blocks */
@@ -591,4 +641,21 @@ span[class*="timestampInline_"] {
     --shadow-sm: 0 2px 4px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 6px 8px -1px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.3);
   }
+}
+
+/* Modern User Panel */
+.panels_c48ade {
+    flex: 0 0 auto;
+    z-index: 10;
+    --custom-panels-spacing: var(--space-xs);
+    background: var(--background-gradient-highest,var(--background-base-low));
+    bottom: var(--custom-panels-spacing);
+    box-sizing: border-box;
+    justify-content: space-between;
+    left: var(--custom-panels-spacing);
+    position: absolute;
+    width: calc(100% - var(--custom-panels-spacing)*2);
+    border-top: none;
+    border-bottom: var(--border-subtle);
+    border-radius: var(--radius-lg);
 }
