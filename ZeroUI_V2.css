@@ -1,8 +1,8 @@
 /**
- * @name ZeroUI — 2.2.1
+ * @name ZeroUI V2 — 2.2.2
  * @author 7xeh
  * @description A modern, sleek Discord theme built for aesthetic and usability.
- * @version 2.2.1
+ * @version 2.2.2
  * @authorId 785035260852830219
  */
 
@@ -174,8 +174,7 @@
   height: var(--player-expanded-height);
   /* Subtle lift */
   transform: translateY(-1px);
-  box-shadow:
-    0 12px 28px color-mix(in oklab, black 74%, transparent 26%);
+  box-shadow: none;
 }
 
 /* When hovering the player, scale up the album art to the expanded size for consistency */
